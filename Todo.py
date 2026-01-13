@@ -1,15 +1,17 @@
 def show_menu():
+    #Display he 
     print("1. Add task")
     print("2. View task")
-    print("3. View task as done")
+    print("3. Mark task as DONE")
     print("4. Delete Task")
-    print("4. Edit Task")
-    print("6. Exit")
+    print("5. Edit Task")
+    print("6. Show Performed Task")
+    print("7. Exit")
 
 def add_task():
     task=input("enter a task")
     with open("task.txt","a") as file:
-        file.write(task +"| PENDING\n")
+        file.write(task +" | PENDING\n")
     print("Task Added successfully")
 
 def task_done():
@@ -18,7 +20,7 @@ def task_done():
     with open("task.txt","r") as file:
         task=file.readlines()
         task[num-1]=task[num-1].replace("PENDING","DONE")
-        with open("task.txt", "w") as file:
+    with open("task.txt", "w") as file:
          file.writelines(task)
 
     print("Task updated successfully!\n")
@@ -52,6 +54,14 @@ def edit_task():
 
     print("Task updated successfully!\n")
 
+def show_task():
+    with open("task.txt","r") as file:
+        tasks=file.readlines()
+        for i in tasks:
+            if "DONE" in i:
+                print("{i} \n")
+        else:
+            print("NO TASK FOUND")
 
 def view_task():
     try:
@@ -79,6 +89,8 @@ while True:
     elif choice=="5":
         edit_task()
     elif choice=="6":
+        show_task()
+    elif choice=="7":
         print("GoodBye")
         break
     else:
